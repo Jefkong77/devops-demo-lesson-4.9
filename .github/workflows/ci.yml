@@ -34,27 +34,27 @@ jobs:
           if-no-files-found: error
 
   test:
-      runs-on: ubuntu-latest
-      needs: build
+    runs-on: ubuntu-latest
+    needs: build
 
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v7
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
 
-        - name: Set up Java 21 and cache Maven dependencies
-          uses: actions/setup-java@v6
-          with:
+      - name: Set up Java 21 and cache Maven dependencies
+        uses: actions/setup-java@v6
+        with:
           distribution: temurin
           java-version: '21'
           cache: maven
 
-        - name: Run tests
-          run: mvn test
+      - name: Run tests
+        run: mvn test
 
-        - name: Save test reports
-          if: always()
-          uses: actions/upload-artifact@v7
-          with:
+      - name: Save test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
           name: test-reports
           path: target/surefire-reports
 
